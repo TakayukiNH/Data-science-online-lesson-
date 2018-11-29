@@ -1,0 +1,1477 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Chapter1\_ver2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{1
+本書の概要とPythonの基礎}\label{ux672cux66f8ux306eux6982ux8981ux3068pythonux306eux57faux790e}
+
+    \begin{itemize}
+\tightlist
+\item
+  \textbf{Section \ref{11-この講座の概要}}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Section \ref{111-講座の説明}
+  \item
+    Section \ref{112-データサイエンティストについて}
+  \item
+    Section \ref{113-データ分析の流れ}
+  \item
+    Section \ref{114-必読この講座の注意事項} 
+  \end{itemize}
+\item
+  \textbf{Section \ref{12-pythonの基礎}}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Section \ref{121-jupyterの使い方とpythonの基礎}
+  \item
+    Section \ref{122-クラスとインスタンス} 
+  \end{itemize}
+\item
+  \textbf{Section \ref{13-総合問題}}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Section \ref{131-素数判定}
+  \end{itemize}
+\end{itemize}
+
+    巻末参考URL
+:~https://docs.google.com/spreadsheets/d/103rOAikKbMXVo8p7ijOiQaedEdDLQNxi9pkBfh0u40Q/edit?usp=sharing
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \subsection{1.1
+データサイエンティストの仕事}\label{ux30c7ux30fcux30bfux30b5ux30a4ux30a8ux30f3ux30c6ux30a3ux30b9ux30c8ux306eux4ed5ux4e8b}
+
+ゴール：この書籍の目的を理解する、データ分析の流れを抑える、習得しなければならないことを知る
+
+    本書は、データサイエンスを学ぶための基礎を身に受けることを目的にしています。まずは、データサイエンスとは何か、そして、データサイエンスのために必要な知識として、どのようなものがあるのか、その概要を説明します。
+
+    \subsubsection{1.1.1
+データサイエンティストとは}\label{ux30c7ux30fcux30bfux30b5ux30a4ux30a8ux30f3ux30c6ux30a3ux30b9ux30c8ux3068ux306f}
+
+キーワード：データサイエンティスト、統計学、プログラミング、エンジニアリング、コンサルティング
+
+    本書では、全体を通じて、主にデータ分析について学んでいきます。
+そこでまずは、データ分析の専門家である「データサイエンティスト」について考えてみましょう。この言葉は、さまざまな書物やネット上で定義されており、一概にはまだ定まっていませんが、本書においては、\textbf{ビジネスの課題に対して、統計や機械学習（数学）とプログラミング(IT)スキルを使って、解決する人}と定義します。
+
+    \begin{figure}
+\centering
+\includegraphics{http://www.zsassociates.com/solutions/services/technology/technology-services/~/media/791C9080D8914382BC08E27380C24FC6.ashx}
+\caption{comment}
+\end{figure}
+
+    参照URL：http://www.zsassociates.com/solutions/services/technology/technology-services/big-data-and-data-scientist-services.aspx
+
+    このデータサイエンティスト、数学や統計のエキスパートでなければなれないと思われがちですが、そうではありません。確かに、数学や統計の知識は必要です。しかしそれだけではなく、それを実装できるエンジニアリング能力も必要です。また、そもそもそれらを使ってビジネス課題を解決していくためのコンサルティング能力も求められています。これらのうち、どれか1つが欠けてもデータサイエンティストではありません。しかしすべての分野においてエキスパートであることが求められるわけではありません。求められるのは、統合的な能力です。これらのスキルについて、すべてエキスパートだという人はいませんし、それぞれの強みを持っている人たちでグループを作り、データサイエンスチームを結成することもあります。
+
+データサイエンティストが、どのようにしてデータ分析の課題を実際に解決していくのかなど、より詳しいことについては、巻末の参考文献「A-1」に掲載しているような各種データ分析関連の書物を、ぜひ読んでみてください。
+
+    \subsubsection{1.1.2
+データ分析の流れ}\label{ux30c7ux30fcux30bfux5206ux6790ux306eux6d41ux308c}
+
+キーワード：データ分析の流れ、PDCA
+
+    では、データサイエンティストは、与えられたデータをどのようにして分析すればよいのでしょうか。
+データ分析では、流れを創ることが重要です。たとえば、ビジネスデータを分析するプロジェクトでは、そのビジネス理解、データ理解、データ加工、処理、モデリング、検証、運用という流れで進めていくのが一般的です。
+こうした流れのうち、重要度が特に高いのが、ビジネス理解です。ここを外すと、データ分析の意味がなくなってしまいます。
+データ分析には目的があります。分析ありきではありません。しかしクライアントや関係者が、はっきりと目的を持っていないこともあります。その場合は、目的を定めるところから始めることになります。話し合いなどをしながら、データサイエンティスト側から課題を見つけ、提案していくことが求められます。この過程では、他の人たち（コンサルタント、営業等）と協力する必要がありますし、またクライアントや関係者ともコミュニケーションをとっていく必要があります。
+
+そして、こうした流れを回していくことも大事です。どこかの段階が終わったら完了ではなく、サイクルを回し続ける、いわゆるPDCAサイクルの流れまで持っていく必要があります。
+データをどのように分析するのかというモデリングだけにしか興味がない人にとって、こうしたビジネス的な話は、面白くないかも知れませんが、これが現実です。
+データサイエンティストの仕事には、こうした側面もあるという現実をお伝えしたうえで、それを、どのようにアプローチしていくのか、どのようにして具体化（実装）するのかを学んでいくのが、この書籍です。
+
+    \begin{figure}
+\centering
+\includegraphics{https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Data_visualization_process_v1.png/525px-Data_visualization_process_v1.png}
+\caption{comment}
+\end{figure}
+
+    参照URL：http://www.kdnuggets.com/2016/03/data-science-process.html
+
+    \begin{quote}
+\textbf{{[}ポイント{]}}
+\end{quote}
+
+\begin{quote}
+データ分析の現場で大事になるのは、ビジネス理解やその目的を明確化し、PDCAサイクルの流れ（データ分析のプロセス）を創ることです。
+\end{quote}
+
+    データ分析のプロジェクトの流れを学んだり、データ分析のフローや結果のシステム化や実務での運用したりする際に役立つ書籍として、巻末に参考文献「A-2」「A-3」を掲載しています。
+
+    \subsubsection{1.1.3 本書の構成}\label{ux672cux66f8ux306eux69cbux6210}
+
+キーワード：データ分析、Python、SQL、線形代数、微分積分学、確率、統計、機械学習
+
+    この本は、データサイエンティストになるために必要なことを、実際に体験しながら説明する書籍です。
+すでに説明したようにデータサイエンティストは、数学や統計の知識のほか、エンジニア力やコンサルティング力も必要になるので、本書の内容も多岐に渡ります。
+
+第1章から第4章の内容が、データ分析のための基礎知識です。
+このあと1章では、データ分析によく使われるプログラミング言語であるPythonや、本書に掲載しているサンプルを実際に動かせるJupyter
+Note
+Bookについて説明をします。そして2章では、データ分析の際にPythonと組み合わせて使われる科学計算や統計ライブラリであるNumpy、Scipy、Pandas、Matplotlibについて説明します。
+第3章と第4章は、数学的な基礎知識を説明する章です。第3章では統計学の基本と単回帰分析について、第4章では確率の統計と基礎について学びます。第4章は、少し理論的なお話になり数式も出てきますが、徐々に慣れてください。
+
+第5章から第7章は、Pythonでデータを扱うためのエンジニア力を付ける章です。
+第5章では科学計算に使われるNumpyやScipy、第6章ではデータ加工処理に必要となるPandasを使ったテクニック、そして7章では、データの可視化（Matplotlib）について学びます。
+この章までにPythonのデータ分析前の処理や加工の基礎を身に付け、総合問題でそれらの手法を活用します。具体的には金融の時系列データやマーケティングデータを例に取り、データ分析の実務現場でも使われている基礎的な手法を紹介します。
+
+第8章からが機械学習の単元です。つまりモデルを作って学習させていく話です。
+第8章ではあらかじめ答えがわかっているデータに対して学習する教師あり学習を習得します。そして次の第9章では、あらかじめ答えがわかっていない分析のアプローチ、すなわち教師なし学習を習得します。続く第10章では、その機械学習で学んだモデリングを検証したりチューニングしたりする方法を学びます。モデルは作ったら終わりではなく、しっかりと検証する必要があるので、学習データにモデルが最適化されすぎる「過学習」の問題などについても説明します。
+
+第11章と第12章は、まとめの章です。
+第11章ではデータサイエンスの中級者になるために必要なスキル、たとえばPythonの高速化や深層学習入門、Spark（Pyspark）を紹介します。本書はデータサイエンスの入口です。大事なのは、その後、学習をさらに広げて深めていくことです。そのための手引きとなる章です。第12章は今まで学んだスキルを試すためのまとめの総合問題となります。
+
+これらの章をすべて習得すれば、データ分析に必要な最低限のスキル、そして、今注目されている深層学習などを学ぶための前知識も身に付けることができます。
+余談ですが、ここでデータ分析のスキルをしっかりと身に付けておけば、自分の市場価値を上げることができますし、就職や転職するときの選択肢が大きく広がります。
+
+    \subsubsection{1.1.4
+本書を読む進めるのに役立つ文献}\label{ux672cux66f8ux3092ux8aadux3080ux9032ux3081ux308bux306eux306bux5f79ux7acbux3064ux6587ux732e}
+
+本書はデータ分析の入門書ではありますが、いま述べたすべての分野について、本当に基礎から説明することはできません。そのため、やむなく、ある程度の基礎知識を前提とします。
+
+本書で前提としている知識は、大学で習う微分・積分と線形代数の基礎、そして簡単なプログラミング経験があること（可能ならPython）を想定しています。また、データ分析は確率・統計と深く関わるので、この書籍とは別に、確率と統計の基礎を体系的に学習することをお勧めします。
+
+本書では厳密な数式に基づいた内容（集合・位相や測度論に基づいた確率統計）というよりも、データ分析の現場に必要なスキルを身につけるという視点で解説をしているので、難しい箇所もあるかも知れませんが、一度にすべてを理解しなくても先には進むことができます。分からない箇所があったり、気になっている箇所があったら、巻末の参考文献「A-4」や「A-5」、参考URL「B-1」などを都度、参考にしてください。
+
+なお本書は全体がつながっているので、後から振り返って分かるということもあります。ですから、まずは、少し分からないところがあっても、そこでつまづかず、読み進めてみてください。
+
+    また本書では一部、線形代数や微分積分学の基礎知識を前提に話を進めます。不安がある人は、巻末の参考文献「A-6」などを見て復習してください。後の章でも、固有値などが出てくるので、さらっと読んでおきましょう。
+
+もちろんすべてを復習する必要はありません。該当の章を実際に試す上で、必要そうな箇所をピックアップしたり、そこで出現する専門用語をネットで調べながら学習を進めてください。さらっと読んでみて、自分にあっている本を1～2冊購入すればよいでしょう。
+
+なお、線形代数や微分積分学に限った話ではありませんが、大学の数学は抽象度が上がり、苦手意識を持つ人が多いようです。問題演習をこなすことによってイメージが付きやすくなるので、参考文献「A-6」の書籍などに掲載されている例題や演習を中心にやってみると理解が高まります。
+
+    参考文献「A-7」に掲載している書籍は少し高度ですが、大学1～2年の数学に不安のある方、数学的な厳密性を求めたい方にオススメします。解析学、線形代数、統計学の基礎を一通り学ぶことができます。
+
+    \subsubsection{1.1.4
+手を動かして習得しよう}\label{ux624bux3092ux52d5ux304bux3057ux3066ux7fd2ux5f97ux3057ux3088ux3046}
+
+キーワード：自分の手を動かして学ぼう
+
+    「はじめに」にも書いたように、本書の大きな特徴として、「実際に手を動かしながらデータ分析の手法が学べる環境がある」という点が挙げられます。
+本書では、Jupyter
+Notebookという環境を使って、実際にPythonを使ってデータ分析するプログラムを作り、すぐに試せるようサンプルを提供しています。
+
+Jupyter
+Notebookのインストール方法などはAppendixにまとめていますので、まずはそちらを参照して環境を準備してください。
+
+ビジネスの理解ができても、それを形にする（実装する）ことができなければ、データサイエンティストではありません。そこで本書では、さまざまなデータに対処して、実装できることを目指します。そこで、学習する上でとても大切になってくるのが、\textbf{「自分で考えて手を動かしながら学ぶこと」}です。
+
+この書籍の中で、実際に変数を変えてみたり、コードを実行して、結果をみてください。
+基本的には、上から順に実行するだけで良いのですが、ただコードを眺めているだけでは、分析やコーディングのスキルは身につきません。実際に試行錯誤することでしか、コーディングスキルは身につきません。書籍のところどころに、「〜をしてみてください」や「考えてください」という文言（\textbf{{[}やってみよう{]}}）があるので、そうしたところでは、次に進む前に、きちんと立ち止まって考えて、コーディングしてみてください。
+
+さらに、練習問題などに関わらず、ご自身の中で「ここの数字を変えたり、処理を変えたらどうなんだろう」など、仮説やアイデアが浮かんだら是非、いろいろと試してみてください。
+
+時間はかかるかもしれません。詰まる時もあるかもしれませんし、エラー文などが返ってくるかもしれませんが、エラー文も見ながら、まずは自分で調べながらやることも大事です。またコードが複数行あって、書籍の説明文だけでは分からない処理があるかもしれません。そのときは、1行1行実行して、どういう結果が返ってくるのか、見ていきましょう。そこから1つ1つ学ぶことができるのです（もちろん、簡単だと思われる場合は、適宜スキップしてください）。
+
+    本書を読み進めていく中で、わからないキーワードやライブラリ、コードなどが出てくることもあると思います。そのときは、これまで挙げた参考文献などを見るだけではなく、検索エンジン（Googleなど）を積極的に使って調べていきましょう。はじめは調べたいものがすぐに見つからず、時間がかかるかもしれませんが、慣れてくれば調べるコツも分かってきます。この\textbf{調べる力もとても重要}です。
+
+また、この本書に書いてあることをすべて丸暗記しようなどとは思わないでください。
+あくまでも本書は、Pythonを使って、さまざまな処理ができるということのを学んでもらうためのものであって、すべて覚えてもらうことを想定していません。
+学んだばかりの処理は、すぐに使いこなせないかもしれませんが、必要なものは使う頻度も多くなって、そのうち手が覚えて、自然に使えるようになります。
+実際、現場で働いている多くのエンジニアは、わからないことがあるときは、ネットで探したり、掲示板で聞いたりして、仕事をしています。
+ですから特に初学者の方は、本書ではさまざまな方法があるというのをまず知って、必要なときに振り返って、使えることが大事です。
+
+    御託を並べてきましたが、自分で考えてコーディングしたものが動いて、結果が返ってくるというのはとても楽しいです。
+もちろん、単純作業もありますが、それを自動化したり、うまく処理できるスクリプトができたときも快感です。クリエティブな要素も多いので、ぜひその感触も掴んでください。
+
+    \begin{quote}
+\textbf{{[}ポイント{]}}
+\end{quote}
+
+\begin{quote}
+実際にPythonのコードを書いて実行し、結果をみながら、試行錯誤しよう。そして、楽しんでプログラミングしよう。
+\end{quote}
+
+    なお、Pythonを使った自動化については、参考文献「A-8」のような本が出版されているので、参考にしてください。参考URL「B-2」のほうは、「A-8」の英語版（原本）ですが、無料です。PDF版もあるようです。フリーの教材や講義は英語が多いので、ついでに英語の勉強もしましょう。
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \subsection{1.2 Pythonの基礎}\label{pythonux306eux57faux790e}
+
+ゴール：Jupyterを使ってPythonの基礎的な実装ができる
+
+本書では、プログラミング言語としてPythonを使います。そもそもなぜPythonを使うのでしょうか。それは、他のプログラミング言語と比べてコーディングがしやすく、さまざまなこと（データの加工、取得、モデリング等）が一貫して簡単にできるからです。また、データ解析や機械学習系のライブラリが揃っているのも特徴です。
+
+こうした理由で、多くのデータサイエンティストが、データ解析にPythonを利用しています。Pythonの構文は比較的簡単なので、Python以外でプログラムをやってきた人はもちろん、プログラム経験がない人たちでもすぐに扱うことができます。
+
+    \subsubsection{1.2.1 Jupyter
+Notebookの使い方}\label{jupyter-notebookux306eux4f7fux3044ux65b9}
+
+キーワード：Jupyter Notebook、ショートカットキー
+
+では、Pythonのコードとは、どのようなものでしょうか。早速、Pythonのコードを見て、実行していきましょう。
+Jupyter
+Notebook（以下Jupytert環境）を使えば、Pythonプログラムの実行は、とても簡単です。コードを入力して実行操作するだけで、結果が表示されます。
+以下、実際にやってみましょう。なお掲載しているコードは、基本的に上から順に実行してください（後ろで掲載しているコードが、前のコードの実行を前提としたところがいくつかあり、それを途中から実行すると、同じ結果とならないことがあります）。
+
+    まずは、プログラミング言語入門でおなじみの「Hello,
+world!」です。Pythonなら、次のコードで足ります。\texttt{print}は画面に出力する関数（命令）です。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hello, world!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Hello, world!
+
+    \end{Verbatim}
+
+    このコードを実際にJupytert環境で実行するには、次のようにします。
+
+【手順】　Jupyter環境でPythonのコードを入力する
+
+［1］　セルを追加する
+Jupyter環境では、「セル」というところに文章やコードを記述します。
+新規にNotebookを作成したときは、1つのセルがあるはずなので、そこにコードを記述します。もしセルがない場合、もしくは、セルを追加して他のコードをさらに実行したいときなどには、［+］ボタンをクリックすると、セルを追加できます。
+セルには、「Code」「Markdown」「Raw
+NBConvert」の3種類があります。コードを実行するには［Code］をクリックしてください。
+
+・Code　コードを書く場合（書いたコードを実行できます）
+
+・Markdown　文章を書く場合（書いたコードで「\#」などで始まる部分は書式化して表示されます）
+
+・Raw NBConvert　何も加工せずにそのまま編集・表示します。
+
+    \begin{figure}
+\centering
+\includegraphics{https://qiita-image-store.s3.amazonaws.com/0/67592/6634bd1a-4e49-7fcf-4a6f-700009ea0594.png}
+\caption{dd}
+\end{figure}
+
+    ［2］　コードを入力する
+セルの種類を［Code］にしたら、そこに、本書に掲載されているプログラムを入力します。
+
+    
+
+    ［3］　実行する
+セルをクリックして選択した状態にしておき、再生ボタンのようなもの（RUN▶︎\textbar{}）をクリックすることで実行できます。もしくは、［Sfhit］キー＋［Enter］キーを押すことでも実行できます。
+実行結果は、すぐ下に表示されます。このときもし、文法エラーがあれば、文法エラーの旨が表示されます。
+実行すると、セルがもうひとつ増えて、さらにプログラムを入力できるようになります。必要なければ、はさみのアイコンをクリックして、そのセルを削除してもかまいません。
+
+プログラムを修正して再実行したいときは、コードを変更して、もう一度実行すれば、実行結果が、それに伴って変わります。
+
+    
+
+    複数行から構成されるコードの入力や実行も同じです。たとえば、次のコードは、足し算（+）、かけ算（*）、そして、べき乗（**）を計算するものです。なお、\#はコメントアウトで、無視されます。後々のために、適宜、コメントを残すことも大事です。
+ここでは\texttt{print}を使って出力していますが、\texttt{print}なしで「\texttt{1+1}」や「\texttt{2*5}」「\texttt{10**3}」のように入力するだけでも同様に出力でき、電卓のようにも使えます。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} 演算とその出力例}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{l+m+mi}{5}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{10} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{3}\PY{p}{)} \PY{c+c1}{\PYZsh{} 10の3乗, べき乗は**を使う}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2
+10
+1000
+
+    \end{Verbatim}
+
+    Jupyter環境でコードを実行するための最低限の手順は以上です。
+
+本書でコードが登場したときは、［＋］を押してセルを追加して、そこにコードを入力して実行してみてください。
+
+セルを切り取りたい場合は［ハサミ］ボタンを、セルを上下に持って行きたい時は［↑］［↓］ボタンをクリックします。
+コードを書くときは、いま説明したように「Code」を使いますが、文章などを記述したいときは、「Markdown」を選択してください。メモを残したい場合などに便利です。
+
+Jupyter環境では、さまざまなアウトプットが作れるので、もし詳しく知りたい人は、以下の参照などを見ながら実行することをお勧めします。
+なお、参照先では説明がPython
+2のものとなっていますが、現在のPythonの最新バージョンはPython 3です。
+Python 2 と3ではコードの書き方が変わっており、本書はPython
+3に基づいています。Python
+2のサポートは2020年までとなっているため、今後はPython
+3を使っていくことをお薦めします。
+
+Jupyterの使い方については巻末の参考URL「B-3」も参照してください。
+
+    もっと作業の効率を高めたいなら、ショートカットキーを使いこなせるようになりましょう。編集モードでない状態（［ESC］キーを押します。）で［H］キー押すと以下のような画面が出てくるので、例えば、新しいセルを下に追加したいときは、［B］キーを押します。他にも、コピー(［C］)、貼り付け(［V］)などもあるので、ぜひ使いこなしてください。ショートカットキーに慣れていない人は、はじめは少し大変かもしれませんが、慣れると圧倒的に作業時間が短くなります。
+
+たとえばコードが長くなって行数を表示したいときには、該当をセルを選択し、［ESC］キーを押した後に「L（エル）」キーを押します。すると行数が表示されるようになります。
+
+    \begin{figure}
+\centering
+\includegraphics{http://www.perfectlyrandom.org/assets/jupyter-keyboard-shortcuts.png}
+\caption{comment}
+\end{figure}
+
+    \begin{quote}
+\textbf{{[}ポイント{]}}
+\end{quote}
+
+\begin{quote}
+作業（コーディング）を効率よく進めるためには、ショートカットキーを使いなそう。
+\end{quote}
+
+    なお、ショートカットキーを使う場面はJupyterだけではありません。ほとんどの人がWindowsかMacを使っていると思いますので、それぞれのショートカットキーも使えると作業効率が高まります（Excelなどもそうです）。全く使っていなかった人は、ぜひ使えるようになりましょう。スポーツ（野球やバスケットなど）でいうところの基礎練習（素振り、ドリブルなど）だと思って、手を慣らしてください。
+
+ショートカットキーについては参考URL「B-4」も参照してください。
+
+    \subsubsection{1.2.2 Pythonの基礎}\label{pythonux306eux57faux790e}
+
+キーワード：演算、文字列、変数
+
+    Jupyter環境でコードを実行する方法がわかったところで、Pythonの基本を、さらに続けます（これから提示するコードは、ぜひ、Jupyter環境に入力して実行してみてください）。
+
+次の例は、\texttt{sample\_str}という名前の変数に、「test」という文字列を格納し、\texttt{print}でその変数に格納されている値を表示させるというコードです。Pythonで文字列を表現するには、「"test"」のように全体をダブルクォーテーション（もしくは「'」（シングルクォーテーション）も使えます）で囲みます。
+
+なお、普通のプログラミング言語（C言語やJavaなど）では、変数を扱うときに整数なのか文字なのかを「型」として設定し、これから利用するという宣言をする必要があります（\texttt{int\ x}
+など）が、Pythonには変数の型がなく、また宣言も必要ないので、使いたいときに代入するだけで使えます（型がある言語を、静的型付け言語といいます。C言語やJavaなどの言語は静的型付け言語です。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} 文字列}
+        \PY{n}{sample\PYZus{}str} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{sample\PYZus{}str}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+test
+
+    \end{Verbatim}
+
+    文字列の後ろに「{[}番号{]}」を指定すると、文字列の一部を取り出すことができます。これをインデックスと言います。インデックスは0から始まります。たとえば次の例は、\texttt{sample\_str}変数の先頭の文字や2番目の文字を取り出すものです。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} 文字の抜き出しも可能。なお、0から始まる。}
+        \PY{n}{sample\PYZus{}str}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} 't'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} 2番目の文字は1を指定}
+        \PY{n}{sample\PYZus{}str}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} 'e'
+\end{Verbatim}
+            
+    次の例は、インデックス5の文字を取り出そうとしています。これまでの流れでは、\texttt{sample\_str}には「"test"」という4文字の文字列が格納されているので、インデックスの最大は最後の「t」に相当する「3」です。つまり、インデックス5を指定しても、6番目の文字はないので、エラーとなります。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} 実行してもエラーが出るので注意}
+        \PY{n}{sample\PYZus{}str}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        IndexError                                Traceback (most recent call last)
+
+        <ipython-input-6-a99414d7448b> in <module>()
+          1 \# 実行してもエラーが出るので注意
+    ----> 2 sample\_str[5]
+    
+
+        IndexError: string index out of range
+
+    \end{Verbatim}
+
+    今後、実装して計算を実行したあとにエラーに遭遇することは多々あります。
+そのときに、解決の手がかりとなるのが、表示されるエラーメッセージです。この例では、最後に「\texttt{IndexError:\ string\ index\ out\ of\ range}」と表示されています。「\texttt{IndexError}（インデックスのエラー）」であり、「\texttt{string\ index\ out\ of\ range}」（文字インデックスが範囲外）というメッセージですから、「5の部分はおかしいのかな」ということがわかります。
+
+当たり前のことですが、エラーが発生したときは、まずはエラーメッセージを確認しましよう。「-\/-\/-\/-\textgreater{}
+」がエラーが発生している場所を指しています。
+エラーメッセージがわからないときは、そのままエラーメッセージをGoogleなどで検索してみましょう。他の人も同じようなエラーに遭遇している可能性は意外と高いので、早く解決策が見つかるかもしれません。
+
+    \begin{quote}
+\textbf{{[}ポイント{]}}
+\end{quote}
+
+\begin{quote}
+エラーが発生した時は、慌てずにエラーメッセージをしっかり確認しましょう。わからなければ、そのままエラーメッセージを検索エンジンで探しましょう。
+\end{quote}
+
+    さて、先ほどは変数に文字を割り当てましたが、もちろん数字を割り当てることもでき、その変数を使って、演算も可能です。なお、=は等しいという意味ではなく、右の値を左の値に割り当てするという意味です。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}　変数にデータを割り当て}
+        \PY{n}{sample\PYZus{}data} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{sample\PYZus{}data}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} 上の数字に10を足す}
+        \PY{n}{sample\PYZus{}data} \PY{o}{=} \PY{n}{sample\PYZus{}data} \PY{o}{+} \PY{l+m+mi}{10}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{sample\PYZus{}data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1
+11
+
+    \end{Verbatim}
+
+    ここでは変数の名前を\texttt{sample\_data}としましたが、何か変数を作成するときは、可能な限り分かりやすい名前で作成しましょう。ただ、単なる数字のチェックなどをするだけであれば「a
+=」などでも良いですし、実際に、本書でも、一時的に使う変数などには、特に凝った名前は付けていません。
+
+大規模な開発になってくるほど変数名は大事です。もちろん、第三者のためにという意味でメリットになりますが、将来の自分のためにもなります。変数を書いた直後はどんな変数を割り当てたのか覚えていますが、1週間、1ヶ月後その変数xを見たときに、どうでしょうか。何の変数だったのか忘れてしまうことは多々あります。さらにコードが長くなってくると、変数も増えてきて、わからなくなります。
+
+コーディングについては、絶対的なルールはないですが、ある程度は規定されているので、ぜひ参考URL「B-5」のサイトなど見て参考にしてください。
+
+    他、変数に関する注意点として、プログラミング言語には、\textbf{予約語}といわれる、あらかじめ用意してある変数や組み込みオブジェクトなど(\texttt{while}、\texttt{if}、\texttt{sum}など)がありますので、それらを変数名として使わないように注意しましょう。変数名として予約後を使ってしまうと、後からその機能が使えなくなってしまいますので、以下の情報等も参考に、変数名の選択には注意してください。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} 予約語}
+        \PY{n+nb}{\PYZus{}\PYZus{}import\PYZus{}\PYZus{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{keyword}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{kwlist}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} ['False',
+         'None',
+         'True',
+         'and',
+         'as',
+         'assert',
+         'break',
+         'class',
+         'continue',
+         'def',
+         'del',
+         'elif',
+         'else',
+         'except',
+         'finally',
+         'for',
+         'from',
+         'global',
+         'if',
+         'import',
+         'in',
+         'is',
+         'lambda',
+         'nonlocal',
+         'not',
+         'or',
+         'pass',
+         'raise',
+         'return',
+         'try',
+         'while',
+         'with',
+         'yield']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} 組み込みオブジェクト}
+        \PY{n+nb}{dir}\PY{p}{(}\PY{n}{\PYZus{}\PYZus{}builtins\PYZus{}\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} ['ArithmeticError',
+         'AssertionError',
+         'AttributeError',
+         'BaseException',
+         'BlockingIOError',
+         'BrokenPipeError',
+         'BufferError',
+         'BytesWarning',
+         'ChildProcessError',
+         'ConnectionAbortedError',
+         'ConnectionError',
+         'ConnectionRefusedError',
+         'ConnectionResetError',
+         'DeprecationWarning',
+         'EOFError',
+         'Ellipsis',
+         'EnvironmentError',
+         'Exception',
+         'False',
+         'FileExistsError',
+         'FileNotFoundError',
+         'FloatingPointError',
+         'FutureWarning',
+         'GeneratorExit',
+         'IOError',
+         'ImportError',
+         'ImportWarning',
+         'IndentationError',
+         'IndexError',
+         'InterruptedError',
+         'IsADirectoryError',
+         'KeyError',
+         'KeyboardInterrupt',
+         'LookupError',
+         'MemoryError',
+         'NameError',
+         'None',
+         'NotADirectoryError',
+         'NotImplemented',
+         'NotImplementedError',
+         'OSError',
+         'OverflowError',
+         'PendingDeprecationWarning',
+         'PermissionError',
+         'ProcessLookupError',
+         'RecursionError',
+         'ReferenceError',
+         'ResourceWarning',
+         'RuntimeError',
+         'RuntimeWarning',
+         'StopAsyncIteration',
+         'StopIteration',
+         'SyntaxError',
+         'SyntaxWarning',
+         'SystemError',
+         'SystemExit',
+         'TabError',
+         'TimeoutError',
+         'True',
+         'TypeError',
+         'UnboundLocalError',
+         'UnicodeDecodeError',
+         'UnicodeEncodeError',
+         'UnicodeError',
+         'UnicodeTranslateError',
+         'UnicodeWarning',
+         'UserWarning',
+         'ValueError',
+         'Warning',
+         'WindowsError',
+         'ZeroDivisionError',
+         '\_\_IPYTHON\_\_',
+         '\_\_build\_class\_\_',
+         '\_\_debug\_\_',
+         '\_\_doc\_\_',
+         '\_\_import\_\_',
+         '\_\_loader\_\_',
+         '\_\_name\_\_',
+         '\_\_package\_\_',
+         '\_\_spec\_\_',
+         'abs',
+         'all',
+         'any',
+         'ascii',
+         'bin',
+         'bool',
+         'bytearray',
+         'bytes',
+         'callable',
+         'chr',
+         'classmethod',
+         'compile',
+         'complex',
+         'copyright',
+         'credits',
+         'delattr',
+         'dict',
+         'dir',
+         'divmod',
+         'dreload',
+         'enumerate',
+         'eval',
+         'exec',
+         'filter',
+         'float',
+         'format',
+         'frozenset',
+         'get\_ipython',
+         'getattr',
+         'globals',
+         'hasattr',
+         'hash',
+         'help',
+         'hex',
+         'id',
+         'input',
+         'int',
+         'isinstance',
+         'issubclass',
+         'iter',
+         'len',
+         'license',
+         'list',
+         'locals',
+         'map',
+         'max',
+         'memoryview',
+         'min',
+         'next',
+         'object',
+         'oct',
+         'open',
+         'ord',
+         'pow',
+         'print',
+         'property',
+         'range',
+         'repr',
+         'reversed',
+         'round',
+         'set',
+         'setattr',
+         'slice',
+         'sorted',
+         'staticmethod',
+         'str',
+         'sum',
+         'super',
+         'tuple',
+         'type',
+         'vars',
+         'zip']
+\end{Verbatim}
+            
+    \begin{quote}
+\textbf{{[}ポイント{]}}
+\end{quote}
+
+\begin{quote}
+予約語や組み込みオブジェクトなどに注意して変数名を設定しよう。
+\end{quote}
+
+    \subsubsection{1.2.3
+リストと辞書型}\label{ux30eaux30b9ux30c8ux3068ux8f9eux66f8ux578b}
+
+キーワード：リスト、辞書型
+
+    次は、リストについて説明します。リストとは、他の言語で言うところの配列のようなものです。データ分析では配列のような連続したデータを扱うことが多いことから、とてもよく使われます。
+
+以下は、1から10まで数字が並んでいるデータを作っています。
+Pythonでリストを表現するには、全体を「{[}」と「{]}」で囲んでカンマで区切ります。先頭からn番目の要素は、「変数名\texttt{{[}n{]}}」のように表記することで取得できます。たとえば、\texttt{sample\_data\_list}という要素の先頭は\texttt{sample\_data{[}0{]}}、2番目は\texttt{sample\_data{[}1{]}}です。文字列の取り出しのときと同様に、インデックス番号は0から始まります。
+
+以下で、\texttt{print(sample\_data\_list)}を実行したときに、\texttt{{[}1,\ 2,\ 3,\ 4,\ 5,\ 6,\ 7,\ 8,\ 9,\ 10{]}}と表示されているのがわかると思います。次に\texttt{type}関数を使って、\texttt{sample\_data\_list}の変数のタイプを表示しています。これは、\texttt{class\ \textquotesingle{}list\textquotesingle{}}と表示されていますので、リスト型の変数だとわかります。ほか、要素数は\texttt{len}関数を使って、「\texttt{len(sample\_data\_list)}」のように表記すると取得できます。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} list}
+         \PY{n}{sample\PYZus{}data\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{sample\PYZus{}data\PYZus{}list}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} typeで変数のタイプがわかる}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{変数のタイプ:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{type}\PY{p}{(}\PY{n}{sample\PYZus{}data\PYZus{}list}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 1つの要素を指定。0から始まり、[1]は2番目になるので注意。}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{2番目の数：}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{sample\PYZus{}data\PYZus{}list}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} lenで要素の数を出力。ここでは1から10までの10個なので、結果は10。}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{要素数：}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{sample\PYZus{}data\PYZus{}list}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+変数のタイプ: <class 'list'>
+2番目の数： 2
+要素数： 10
+
+    \end{Verbatim}
+
+    \begin{quote}
+\textbf{{[}やってみよう{]}}
+\end{quote}
+
+\begin{quote}
+上の＋を押して（もしくは非編集状態で、［B］キーを押して）セルを追加し、何かのリストを作成して、要素数を出力してみましょう。
+\end{quote}
+
+    なお、リストにあるそれぞれの要素を2倍したい場合、2をかけても、リスト全体が、もう一度、繰り返されるだけです。それぞれの要素の値を2倍したいのなら、\texttt{for}文を書くか、次で説明する\texttt{Numpy}を使うと良いです。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} リスト自体が2倍になる}
+         \PY{n}{sample\PYZus{}data\PYZus{}list} \PY{o}{*} \PY{l+m+mi}{2} 
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+\end{Verbatim}
+            
+    リスト型と似たものに、辞書型があります。辞書型を使うと、キーと値をペアにして複数の要素を管理することができます。キーは整数だけではなく、文字列で設定できます。また、リストとは違って、順番は特に関係ありません。
+
+次の例のように、「appleが100」「bananaが100」「orangeが300」などのように、何か指定したキーに対してデータを保持させたいときに使います。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} dictionary}
+         \PY{n}{sample\PYZus{}dic\PYZus{}data} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{apple}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{banana}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{orange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{300}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mango}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{400}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{melon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{500}\PY{p}{\PYZcb{}}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{sample\PYZus{}dic\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{melon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+500
+
+    \end{Verbatim}
+
+    \begin{quote}
+\textbf{{[}やってみよう{]}}
+\end{quote}
+
+\begin{quote}
+上では、melonを表示させましたが、orangeの値を表示させてみましょう。また、キーがappleとorangeの値を足してみましょう。
+\end{quote}
+
+    \subsubsection{1.2.4
+条件分岐とループ}\label{ux6761ux4ef6ux5206ux5c90ux3068ux30ebux30fcux30d7}
+
+キーワード：制御、内包表記、オブジェクト指向
+
+    Pythonでは書いたプログラムが上から下に向けて実行されるのが基本ですが、その流れを変えて、条件分岐したり繰り返し処理したりするための構文があります。
+
+\paragraph{if文}\label{ifux6587}
+
+まずは条件分岐から説明します。何か条件で処理を分岐したいときはif文を使います。
+ifの横に指定した条件式を満たしている場合（\texttt{True}）は、該当の文（はじめにある\texttt{:}から\texttt{else:}の手前まで）が実行され、そうでない場合は\texttt{else:}以下が実行されます。つまり条件を満たすかどうかによって、処理を2分岐できます。
+
+以下の処理は、数字の「5」が\texttt{sample\_data\_list}というリストの中に入っているかどうかを判定するものです。入ってなければ、\texttt{else}に飛びます。
+Pythonのコーディングにおける注意点ですが、\texttt{if}文などを使うとき、次の行はインデント（字下げ）します。通常は半角スペース4つ分をおきます。Jupyter環境では、改行をしたときに自動でインデントができますが、開発環境によっては注意してください。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} 数字の設定}
+         \PY{n}{findvalue} \PY{o}{=} \PY{l+m+mi}{5}
+         
+         \PY{k}{if} \PY{n}{findvalue} \PY{o+ow}{in} \PY{n}{sample\PYZus{}data\PYZus{}list}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}　\PYZdq{} \PYZdq{} の中に、扱っている変数を表示させたい場合は、以下のように \PYZpc{}dと\PYZpc{}を組み合わせる}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ は入っています。}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{findvalue}\PY{p}{)}\PY{p}{)}
+         \PY{k}{else}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ は入っていません。}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{findvalue}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+5 は入っています。
+
+    \end{Verbatim}
+
+    \begin{quote}
+\textbf{{[}やってみよう{]}}
+\end{quote}
+
+\begin{quote}
+出力が変わるように、数字の設定（ここでは、\texttt{findvalue}）を変更して、実行してみましょう。また、条件文や、出力結果等を変えてみたりしてください。
+\end{quote}
+
+    結果を表示するときに用いている「"\texttt{\%d} は入っています。"
+\texttt{\%\ (findvalue)})」という記法は、変数などの値を文字列に埋め込むための機能です。こうした埋め込み機能のことを文字列フォーマットと言います。他のプログラミング言語でも似た方法で使われます。
+ここで指定している「\texttt{\%d}」は整数を埋め込む指定です。「\texttt{\%\ (findvalue)}」は、その埋め込みデータです。つまり、\%dと書いたところに、実際の\texttt{findvalue}の値（このコードの例では2行目で「\texttt{findvalue\ =\ 5}」のように5を代入しているので「5」）が埋め込まれます。ここでは整数を埋め込む「\texttt{\%d}」を使いましたが、他にも、文字列の\%s、浮動小数点数の\%fなどもあります。
+
+ここで提示している方法は、\texttt{\%}記法と呼ばれ、古くからある方法ですが、Python
+2.6以降では、より洗練されたformat記法を使うこともできます。\texttt{format}記法を使うと、この部分は、次のように記述できます。
+
+\texttt{print("\{0\}\ は入っていません。".format(findvalue))}
+
+\texttt{\%}記法は古い記法なので今後、廃止される可能性があります。もしそうなったならば、\texttt{format}記法に書き換えてください。なお、本書（データ分析）ではどちらを使っても特に大きな影響はないので、特に区別せずに使っていきます。
+
+    \paragraph{for文}\label{forux6587}
+
+次に、繰り返し処理の構文を説明します。
+まずは\texttt{for}文です。\texttt{for}文は、リストデータなどからデータを取り出し、繰り返し処理します。
+以下は、\texttt{{[}1,\ 2,\ 3{]}}のリストデータに対して、先頭から順番に（1から）データを取り出し、データがなくなる（3まで）まで繰り返し処理（取り出した数字の表示と足し算）を実行しています。初めは0+1=1、次に1+2=3、最後に3+3=6となり、最終的な合計値を表示しています。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} 初期値の設定}
+        \PY{n}{total} \PY{o}{=} \PY{l+m+mi}{0}
+        
+        \PY{c+c1}{\PYZsh{} for 文}
+        \PY{k}{for} \PY{n}{num} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} 取り出した数の表示}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{num:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{num}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} 今まで取り出した数の合計}
+            \PY{n}{total} \PY{o}{=} \PY{n}{total} \PY{o}{+} \PY{n}{num}
+        
+        \PY{c+c1}{\PYZsh{} 最後に合計を表示}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{total}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+num: 1
+num: 2
+num: 3
+total: 6
+
+    \end{Verbatim}
+
+    次の例は、\texttt{for}文を使って、先ほど作成した辞書型のデータを1つ1つ取り出して、それぞれのキーと値を出力するものです。これも、辞書型データがなくなるまで繰り返します。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} for 文}
+         \PY{k}{for} \PY{n}{dic\PYZus{}key} \PY{o+ow}{in} \PY{n}{sample\PYZus{}dic\PYZus{}data}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{dic\PYZus{}key}\PY{p}{,} \PY{n}{sample\PYZus{}dic\PYZus{}data}\PY{p}{[}\PY{n}{dic\PYZus{}key}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+mango 400
+banana 100
+orange 300
+apple 100
+melon 500
+
+    \end{Verbatim}
+
+    \paragraph{複雑なfor文と内包表記}\label{ux8907ux96d1ux306aforux6587ux3068ux5185ux5305ux8868ux8a18}
+
+キーと値を取り出すには、次の例のようにも記述できます。
+これは、あとで説明する\textbf{オブジェクト指向型プログラミング}の特徴で、データ（ここでは\texttt{sample\_dic\_data}）とそれを処理するための\textbf{メソッド}（以下の\texttt{items()}）がセットになっており、それを活用しています。メソッドとはあとで説明する\textbf{関数}みたいなもので、それを使って処理（ここでは、キーと値を返す）をします。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} key, value}
+         \PY{k}{for} \PY{n}{key}\PY{p}{,} \PY{n}{value} \PY{o+ow}{in} \PY{n}{sample\PYZus{}dic\PYZus{}data}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{key}\PY{p}{,} \PY{n}{value}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+mango 400
+banana 100
+orange 300
+apple 100
+melon 500
+
+    \end{Verbatim}
+
+    次の例も\texttt{for}文を使うものですが、これはfor文を使った結果を、さらに別のリストとして結果を作成する方法で、\textbf{内包表記}といいます。先ほどやろうとしていた、リストの要素をそれぞれ2倍する処理です。
+下記のサンプルにあるように、
+
+\texttt{{[}i\ *\ 2\ for\ i\ in\ sample\_data\_list{]}}
+
+と記述すると、\texttt{sample\_data\_list}から値をひとつずつ取り出して変数iに格納します。そしてその\texttt{i}を2倍した値で、新しいリストが作られます。その結果、リストの要素がすべて2倍になった新しいリストが作られます。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} 空のリストを作成}
+         \PY{n}{sample\PYZus{}data\PYZus{}list1} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} 内包表記、sample\PYZus{}data\PYZus{}listから1つ1つ要素を取り出し、2倍した数字を新たな要素とするリストを作成}
+         \PY{n}{sample\PYZus{}data\PYZus{}list1} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{o}{*} \PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{sample\PYZus{}data\PYZus{}list}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{sample\PYZus{}data\PYZus{}list1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+
+    \end{Verbatim}
+
+    内包表記では、条件を指定し、条件に合致するものだけを新しいリストの対象にすることもできます。
+たとえば\texttt{sample\_data\_list}から、値が偶数である要素だけを取り出したいときは、以下のようにします。「\texttt{if\ i\ \%2\ ==0}」の部分が指定している条件です。「\texttt{\%}」は余りを計算する演算子です。つまり、\texttt{i\%2}は、\texttt{i}を2で割った余りです。これが0であるということは偶数であるということを示します。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{p}{[}\PY{n}{i} \PY{o}{*} \PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{sample\PYZus{}data\PYZus{}list} \PY{k}{if} \PY{n}{i} \PY{o}{\PYZpc{}}\PY{k}{2} ==0]
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} [4, 8, 12, 16, 20]
+\end{Verbatim}
+            
+    \paragraph{range関数を使った繰り返しリストの指定}\label{rangeux95a2ux6570ux3092ux4f7fux3063ux305fux7e70ux308aux8fd4ux3057ux30eaux30b9ux30c8ux306eux6307ux5b9a}
+
+なお、連続した整数のリストを作りたいときは、以下のように\texttt{range}関数を使うと便利です。\texttt{range}関数では、数字としては、\texttt{N}を設定しますが、0から\texttt{N-1}が取り出される点に注意しましょう。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} range(N)とすると0からN\PYZhy{}1までの整数}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{11}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+    \end{Verbatim}
+
+    \texttt{range}関数では括弧のなかに「最初の値」「最後の値-1」「飛ばす値」を指定することができます。以下は、1から始めて11の手前まで、2つ飛ばしの要素を持つリストを作成しています。括弧のなかに指定する値のことを「引数（ひきすう）」と言います。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} range(1, 11, 2)は1から開始して2つ飛ばしで、11の手前まで取り出す}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1
+3
+5
+7
+9
+
+    \end{Verbatim}
+
+    また、\texttt{for}文に関連しては、\textbf{\texttt{zip}関数}もよく使われるので、紹介します。
+\texttt{zip}関数は、それぞれ異なるリストを同時に取り出していく処理を実行します。たとえば、\texttt{{[}1,2,3{]}}というリストと、\texttt{{[}11,12,13{]}}という2つのリストがあるとき、それぞれ同じインデックスで値を取って表示したいとき――先頭の値である「1と11」、次の値である「2と12」、そして「3と13」のように繰り返して処理したいとき――は、次のようにします。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{for} \PY{n}{one}\PY{p}{,} \PY{n}{two} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{11}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{13}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{one}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{と}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{two}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ 1 と 11
+ 2 と 12
+ 3 と 13
+
+    \end{Verbatim}
+
+    \paragraph{while文を使った繰り返し処理}\label{whileux6587ux3092ux4f7fux3063ux305fux7e70ux308aux8fd4ux3057ux51e6ux7406}
+
+繰り返し処理をするには、\texttt{for}文以外に\texttt{while}文があります。\texttt{while}文は、条件が成り立っている間は、ずっと繰り返し処理する構文です。
+次の例は、変数\texttt{sample}に値を1ずつ加えていき、その値が10より大きくなった時点で、処理が終わるというものです。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} while 文}
+        \PY{n}{sample} \PY{o}{=}\PY{l+m+mi}{1} 
+        \PY{k}{while} \PY{n}{sample} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{10}\PY{p}{:}
+            \PY{n}{sample} \PY{o}{=} \PY{n}{sample} \PY{o}{+} \PY{l+m+mi}{1}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{sample}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+11
+
+    \end{Verbatim}
+
+    なお、ある条件で処理をストップさせたい（\texttt{while}文を抜けたい）ときには、\texttt{break}を使います。以下は、\texttt{sample}の数字が6を超えた時点で、\texttt{while}の処理から抜け出しています。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} while 文(breakを使用)}
+        \PY{n}{sample} \PY{o}{=}\PY{l+m+mi}{1} 
+        \PY{k}{while} \PY{n}{sample} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{10}\PY{p}{:}
+            \PY{n}{sample} \PY{o}{=} \PY{n}{sample} \PY{o}{+} \PY{l+m+mi}{1}
+            \PY{k}{if} \PY{n}{sample} \PY{o}{\PYZgt{}} \PY{l+m+mi}{6}\PY{p}{:}
+                \PY{k}{break}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{sample}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+7
+
+    \end{Verbatim}
+
+    \subsubsection{1.2.5　関数}\label{ux95a2ux6570}
+
+キーワード：関数
+
+関数は一連の処理をひとまとめにする仕組みです。関数を作成すると、同じような処理を何度か実行したいときに、便利です。また、処理をまとめておくと、後でコードを修正するときにも便利です。
+
+下記に示すのは関数を使ってフィボナッチ数を計算する例です。
+1つ目の\texttt{calc\_multi}関数は、2つの数字（\texttt{a}と\texttt{b}）を\textbf{引数}として、その掛け算の結果を返しています。この引数が入力となって、\texttt{return}で結果を返し（\textbf{返り値}といいます）、これが出力になります。その次の関数\texttt{calc\_fib}は、再帰と言って、自分の関数を中で呼び出しており、フィボナッチ数（1,
+1, 2, 3,
+5...と前と前々の数字を足して、その数を並べたもの）を作成しています。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} function multi}
+         \PY{k}{def} \PY{n+nf}{calc\PYZus{}multi}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{a} \PY{o}{*} \PY{n}{b}
+         
+         \PY{c+c1}{\PYZsh{} function (再帰)}
+         \PY{k}{def} \PY{n+nf}{calc\PYZus{}fib}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{n} \PY{o}{==} \PY{l+m+mi}{1} \PY{o+ow}{or} \PY{n}{n} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mi}{1}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{calc\PYZus{}fib}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{+} \PY{n}{calc\PYZus{}fib}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)}
+             
+         \PY{c+c1}{\PYZsh{} calc}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{掛け算:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{calc\PYZus{}multi}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{フィボナッチ数:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{calc\PYZus{}fib}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+掛け算: 30
+フィボナッチ数: 55
+
+    \end{Verbatim}
+
+    関数にはもう一つ、無名関数と呼ばれるものがあり、これを使うと、コードを簡素化できます。
+無名関数を書くには、\texttt{lambda}というキーワードを使います。普通の関数を作るときと同じで、\texttt{lambda}と記述して引数を設定した後、その処理を記述します。
+無名関数は、後に登場する\texttt{map}関数などとよく組み合わせて使うことが多く、たとえば、第6章で説明する\texttt{pandas}機能と一緒に使って、データの加工処理をします。今はあまりメリットを感じられませんが、後で使うので念頭に置いておいてください。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{}　無名関数、aとbを引数として、a * bを返り値とする}
+         \PY{p}{(}\PY{k}{lambda} \PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{:} \PY{n}{a} \PY{o}{*} \PY{n}{b}\PY{p}{)}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} 30
+\end{Verbatim}
+            
+    \paragraph{}\label{section}
+
+ある文字列（Data
+Scienceなど）を変数に設定し、それを1文字ずつ表示させるプログラムを書いてください。
+
+    \paragraph{}\label{section}
+
+1から50までの自然数の和を計算し、その計算結果を表示させるプログラムを書いてください。
+
+    \subsubsection{1.2.6
+クラスとインスタンス}\label{ux30afux30e9ux30b9ux3068ux30a4ux30f3ux30b9ux30bfux30f3ux30b9}
+
+キーワード：オブジェクト、クラス、インスタンス
+
+    最後に、クラスとインスタンスについて説明します。
+はじめてこれらについて聞いた人は、すぐに理解するのは難しいと思います。ですから以下の実装例を見て、雰囲気だけつかんでください。プログラミング初学者の人は、この節は、読み飛ばしてもかまいません。なぜなら、すぐには必要ないからです。ただし、あとの章で機械学習のライブラリーであるsklearnなどを使うときに必要な概念（インスタンスなど）になるので、そのときには、この節に戻ってきてください。
+
+Pythonはオブジェクト指向型のプログラミング言語です。クラスとは、「オブジェクトのひな型」のようなものです。
+よく挙げられる例が「たい焼き」です。以下のclassの\texttt{PrintClass}はたい焼き機の型を作っています。実際のたい焼きが出来上がったのがインスタンス\texttt{p1}というイメージです。インスタンスとは、クラスからできあがる実体のことです。インスタンスには属性を追加することができ、ピリオドで続けて任意の属性を指定できます。たとえば以下では、\texttt{p1.x}に10、\texttt{p1.y}に100、\texttt{p1.z}に1000を追加しています。
+
+参考までに、クラスとインスタンスのイメージ図も示しておきます。
+
+    \begin{figure}
+\centering
+\includegraphics{http://image.itmedia.co.jp/ait/articles/0803/12/r801.gif}
+\caption{comment}
+\end{figure}
+
+    参照URL：http://image.itmedia.co.jp/ait/articles/0803/12/r801.gif
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} PrintClassクラスの作成とprint\PYZus{}meメソッド（関数）の作成}
+         \PY{k}{class} \PY{n+nc}{PrintClass}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{print\PYZus{}me}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} インスタンスの作成、生成}
+         \PY{n}{p1} \PY{o}{=} \PY{n}{PrintClass}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 属性の値を割り当て}
+         \PY{n}{p1}\PY{o}{.}\PY{n}{x} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{p1}\PY{o}{.}\PY{n}{y} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{p1}\PY{o}{.}\PY{n}{z} \PY{o}{=} \PY{l+m+mi}{1000}
+         
+         \PY{c+c1}{\PYZsh{} メソッドの呼び出し}
+         \PY{n}{p1}\PY{o}{.}\PY{n}{print\PYZus{}me}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+10 100
+
+    \end{Verbatim}
+
+    p1というインスタンスに、\texttt{print\_me()}という関数（メソッド）がついていて、それを呼び出して実行しています。新しく追加した属性の値\texttt{z}は以下のように確認できます。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{} 先ほど追加した属性を表示}
+         \PY{n}{p1}\PY{o}{.}\PY{n}{z}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} 1000
+\end{Verbatim}
+            
+    このオブジェクト指向とクラスの概念は少し難しいので、もう少し具体的な例を見てみましょう。
+
+以下はクラスとして\texttt{MyCalcClass}を作成しており、いくつかのメソッドを作っています。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{class} \PY{n+nc}{MyCalcClass}\PY{p}{:}
+            
+            \PY{c+c1}{\PYZsh{}初期化}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x} \PY{o}{=} \PY{n}{x}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y} \PY{o}{=} \PY{n}{y}
+                
+            \PY{k}{def} \PY{n+nf}{calc\PYZus{}add1}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n}{a} \PY{o}{+} \PY{n}{b}
+            
+            \PY{k}{def} \PY{n+nf}{calc\PYZus{}add2}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}
+        
+            \PY{k}{def} \PY{n+nf}{calc\PYZus{}mutli}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n}{a} \PY{o}{*} \PY{n}{b}
+        
+            \PY{k}{def} \PY{n+nf}{calc\PYZus{}print}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{a}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{：yの値}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+    次に、このクラス（\texttt{MyCalcClass}）からインスタンスを生成します。なお、\texttt{instance\_1}と\texttt{instance\_2}は別物として扱われます。上記のたい焼きで例えると、チーズたい焼きとクリームたい焼きは別物ですよね。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{instance\PYZus{}1} \PY{o}{=} \PY{n}{MyCalcClass}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{instance\PYZus{}2} \PY{o}{=} \PY{n}{MyCalcClass}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    インスタンスを生成するときは、クラスに実装した「\texttt{\_\_init\_\_}」という名前の特別なメソッドが実行されます。これを
+コンストラクタと言います。コードでは、「\texttt{self.x\ =\ x}」「\texttt{self.y\ =\ y}」という文があるので、この文によって、自身の\texttt{x}属性と\texttt{y}属性が、括弧のなかに指定した値になります。
+つまり上記の例では、\texttt{instanced\_1}では、\texttt{MyCalcClass(1,\ 2)}としているので、\texttt{x}が1、\texttt{y}が2となります。同様に、\texttt{instance\_2}の場合は\texttt{x}が5、\texttt{y}が10となります。
+
+これらのインスタンスのメソッドを呼び出してみましょう。まずは、\texttt{instance\_1}からです。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{2つの数の足し算(新たに数字を引数としてセット):}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{instance\PYZus{}1}\PY{o}{.}\PY{n}{calc\PYZus{}add1}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{2つの数の足し算(インスタンス化の時の値):}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{instance\PYZus{}1}\PY{o}{.}\PY{n}{calc\PYZus{}add2}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{2つの数のかけ算:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{instance\PYZus{}1}\PY{o}{.}\PY{n}{calc\PYZus{}mutli}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+        \PY{n}{instance\PYZus{}1}\PY{o}{.}\PY{n}{calc\PYZus{}print}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2つの数の足し算(新たに数字を引数としてセット): 8
+2つの数の足し算(インスタンス化の時の値): 3
+2つの数のかけ算: 15
+data: 5 ：yの値 2
+
+    \end{Verbatim}
+
+    \texttt{calc\_add1}は引数5と3を設定し、その和を返り値として算出しています。\texttt{calc\_add2}は何も引数を指定しておらず、\texttt{self.x}と\texttt{self.y}の値を計算に使っています。この値は、先に説明したようにコンストラクタで設定されています。つまり、\texttt{instance\_1\ =\ MyCalcClass(1,\ 2)}では、その値は、それぞれ1と2として初期値が設定されるので、これらを足した3が表示されます。\texttt{calc\_mutli}は引数の掛け算の結果、\texttt{instance\_1.calc\_print(5)}は、引数5と初期値として設定した\texttt{self.y}の方（2）を表示しています。
+
+    \texttt{次は、}instance\_2を使いましょう。上の\texttt{instance\_1}のときの結果と数字が変わります。なぜ変わっているのか、しっかりと追っていきましょう。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{2つの数の足し算(新たに数字を引数としてセット):}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{instance\PYZus{}2}\PY{o}{.}\PY{n}{calc\PYZus{}add1}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{2つの数の足し算(インスタンス化の時の値):}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{instance\PYZus{}2}\PY{o}{.}\PY{n}{calc\PYZus{}add2}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{2つの数のかけ算:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{instance\PYZus{}2}\PY{o}{.}\PY{n}{calc\PYZus{}mutli}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{n}{instance\PYZus{}2}\PY{o}{.}\PY{n}{calc\PYZus{}print}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2つの数の足し算(新たに数字を引数としてセット): 13
+2つの数の足し算(インスタンス化の時の値): 15
+2つの数のかけ算: 12
+data: 20 \& 10
+
+    \end{Verbatim}
+
+    \begin{quote}
+\textbf{{[}やってみよう{]}}
+\end{quote}
+
+\begin{quote}
+上のクラス（\texttt{MyCalcClass}）を使って、新しくインスタンスを生成し(\texttt{instance\_3}など）、何か出力してみましょう。さらにできれば、異なるメソッド（2つの引数の差分など）をこのクラスに追加して、呼び出して使ってみましょう。
+\end{quote}
+
+    これは見ているだけではわからないと思うので、実際にサンプルなどを作成して実行しましょう。このクラス設計やその実装ができるようになると、大規模な開発をする場合に色々と役に立ちます。
+
+これで、クラスとオブジェクトの説明は終わりますが、巻末の参考URL「B-6」などを見て、初学者の人は、まずはイメージだけつかめるようになりましょう。
+
+    以上で、Pythonの基礎的なコードの説明は終わりです。
+もちろん、これだけでPythonの基礎を抑えるのは不十分です。
+もし基礎に不安があれば、参考文献「A-4」や参考URL「B-1」を見て復習などをしてください。「A-4」で紹介している『はじめてのPython』はとても分厚い本ですが、とても丁寧に説明されており、クラスやオブジェクト指向についてもしっかりと解説されているので、ぜひ読んでみてください。
+
+    \subsection{1.3 総合問題}\label{ux7dcfux5408ux554fux984c}
+
+    \subsubsection{1.3.1 素数判定}\label{ux7d20ux6570ux5224ux5b9a}
+
+（１）10までの素数を表示させるプログラムを書いてください。なお、素数とは、1とその数自身以外の約数をもたない正の整数のことをいいます。
+
+（２）上記をさらに一般化して、Nを自然数として、Nまでの素数を表示する関数を書いてください。
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
